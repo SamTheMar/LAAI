@@ -1,15 +1,3 @@
-/*
-Le caselle del triangolo in figura contengono tutti 
-i numeri interi da 1 a 9. Alcuni numeri sono già 
-stati scritti. Debora ha completato la figura,
-scrivendo i numeri in ogni casella, in modo tale 
-che la somma dei numeri che compaiono su uno 
-stesso lato del triangolo sia sempre uguale a 20.
-
-Quale numero ha scritto Debora nella casella 
-del vertice in basso a sinistra?
-*/
-
 include "all_different.mzn";
 
 set of int: POSSIBLEVALUE = 1..9;
