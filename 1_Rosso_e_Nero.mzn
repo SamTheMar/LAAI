@@ -10,6 +10,6 @@ constraint 25-red1=black1;
 constraint red-red1=red2;
 constraint 27-red2=black2; 
 
-solve satisfy
+solve satisfy;
 
 
