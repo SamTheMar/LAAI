@@ -1,24 +1,19 @@
-include "globals.mzn";
+include "all_different.mzn";
 
-array [1..4, 1..5] of int: dist =[|0, 1, 1, 1, 0
-                                  |1, 1, 1, 1, 1
-                                  |1, 1, 1, 1, 1
-                                  |0, 1, 1, 1, 0|];
-int: start = 1;
-int: end = 16;
-array[1..4, 1..5] of var 0..1: point;
-array[1..16] of var 0..1: p;
+array[1..16] of var 2..19: path;
 
-constraint point[1,2] = 1;
-constraint point[3,5] = 1;
-constraint point[1,1] = 0 /\ point[1,5] = 0 /\ point[4,1] = 0 /\ point [4,5] = 0;
+constraint path[1] = 2;
+constraint forall (i in 2..length(path)-1) (path[i] == 15 -> path[i+1] = 15);
+constraint forall (i in 1..length(path)-1)
+           (if path[i] != 15 then path[i+1] = path[i]+5 \/ path[i+1] = path[i]-5 \/ path[i+1] = path[i]-1 \/ path[i+1] = path[i]+1 endif);           
+constraint forall(j in 2..length(path)) (path[j] != 5 /\ path[j] != 16);
+constraint forall(i in 2..length(path)-1)((path[i]==10 -> path[i+1] != 11) /\ (path[i]==11 -> path[i+1] != 10)); % vedi giù
+constraint forall(i in 1..length(path))(path[i] != 15 -> count(path, path[i], 1));
 
-constraint all_different(p);
-constraint p[start] = 1;
-constraint p[end] = 1;
-constraint p[] = 1 -> p[i] = 1;
-%constraint point[i, j] = point
+var int: distance = (length(path) - count(path,15)) * 10;
+solve maximize distance;
+output ["\(distance)\n"];
 
-var int: total_point = sum(point);
-solve maximize total_point;
 
+%constraint forall(i in 2..length(path))(path[i] mod cols == 1 -> path[i] != path[i-1]+1);
+%constraint forall(i in 2..length(path))(path[i] mod cols == 0 -> path[i] != path[i-1]-1);
