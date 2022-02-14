@@ -1,8 +1,18 @@
+/*
+Trinagle representation
+
+    1  
+   2 3  
+  4   5
+ 6 7 8 9
+
+*/
+
 include "all_different.mzn";
 
-var 1..100: l1;
-var 1..100: l2;
-var 1..100: l3;
+var 1..30: l1;
+var 1..30: l2;
+var 1..30: l3;
 
 array[1..9] of var 1..9: triangle;
 

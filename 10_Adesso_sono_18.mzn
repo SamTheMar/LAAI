@@ -9,7 +9,7 @@ constraint nUp + nDown + nRigth + nLeft - 4 = nWhite;
 constraint nUp == nDown;
 constraint nRigth == nLeft;
 
-var int: nGray= (nUp-2) * (nRigth-2);
+var int: nGray = (nUp-2) * (nRigth-2);
 solve maximize nGray;
 
 output ["Number of gray squares: \(nGray)\n"];

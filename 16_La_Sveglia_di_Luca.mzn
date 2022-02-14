@@ -1,4 +1,4 @@
-include "globals.mzn"; 
+include "all_different.mzn";
 
 array[1..6] of var 0..5: time;
 
