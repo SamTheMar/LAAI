@@ -12,18 +12,15 @@ Cardboard representation
 
 */
 
-include "globals.mzn";
-
 array[1..45] of int: cardboard = [0, 0, 0, 0, 0, 0, 1, 1, 1,
                                   0, 0, 0, 0, 0, 0, 1, 1, 1, 
                                   1, 1, 1, 1, 1, 1, 1, 1, 1,
                                   0, 0, 0, 0, 1, 1, 1, 1, 0, 
                                   0, 0, 0, 0, 1, 1, 1, 1, 1];
 
-array[1..25] of var int: occurrences = global_cardinality(matrix, [i | i in 0..24]);
-array[0..24] of var 0..44: start;
-array[0..24] of var 0..44: end;
-array[0..44] of var 0..24: matrix;
+array[0..23] of var 0..44: start;
+array[0..23] of var 0..44: end;
+array[0..44] of var 0..23: matrix;
 
 constraint forall(i in 0..44)
              (if cardboard[i+1] == 0 
@@ -39,7 +36,7 @@ constraint forall(i in 0..44)
              (forall(j in i+1..44)
                (matrix[j] != matrix[i]) -> end[matrix[i]] = i);
                
-constraint forall(i in 1..24)
+constraint forall(i in 1..23)
            ((end[i] mod 9 - start[i] mod 9 + 1)*(end[i] div 9 - start[i] div 9 + 1) = count(matrix,i));
            
 constraint forall(i in 0..44)
@@ -49,8 +46,10 @@ constraint forall(i in 0..44)
                   i mod 9 >= start[matrix[i]] mod 9 /\ 
                   i mod 9 <= end[matrix[i]] mod 9 
              endif);
-             
-var int: num_diff = count(el in occurrences)(el > 0);
-solve minimize num_diff;
 
+var int: number = max(matrix);
+solve minimize number;
+
+output ["number of shape: \(number)\n"];
 output ["\(matrix)\n"];
+
