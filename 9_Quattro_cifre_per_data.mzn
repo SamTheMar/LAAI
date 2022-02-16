@@ -7,8 +7,10 @@ var 0..30: days = date[1]*10 + date[2];
 constraint forall(i in 1..8) (count(date, date[i], 2));
 
 constraint years == 2021 -> months > 9;
-constraint years == 2021 \/ months == 9 -> days > 19;
+constraint years == 2021 /\ months == 9 -> days > 19;
 
 var int: recentdate = years*10^4 + months*10^2 + days;
 solve minimize recentdate;
+
+output ["date: \(days)-\(months)-\(years)\n"];
 
