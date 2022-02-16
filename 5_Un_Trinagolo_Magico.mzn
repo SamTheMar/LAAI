@@ -7,6 +7,7 @@ Trinagle representation
  6 7 8 9
 
 */
+
 include "all_different.mzn";
 
 array[1..9] of var 1..9: triangle;

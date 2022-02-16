@@ -1,0 +1,56 @@
+/*
+
+Cardboard representation
+
+     0  1  2  3  4  5  6  7  8 
+
+0    0  1  2  3  4  5  6  7  8  
+1    9 10 11 12 13 14 15 16 17 
+2   18 19 20 21 22 23 24 25 26
+3   27 28 29 30 31 32 33 34 35
+4   36 37 38 39 40 41 42 43 44
+
+*/
+
+include "globals.mzn";
+
+array[1..45] of int: cardboard = [0, 0, 0, 0, 0, 0, 1, 1, 1,
+                                  0, 0, 0, 0, 0, 0, 1, 1, 1, 
+                                  1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                  0, 0, 0, 0, 1, 1, 1, 1, 0, 
+                                  0, 0, 0, 0, 1, 1, 1, 1, 1];
+
+array[1..25] of var int: occurrences = global_cardinality(matrix, [i | i in 0..24]);
+array[0..24] of var 0..44: start;
+array[0..24] of var 0..44: end;
+array[0..44] of var 0..24: matrix;
+
+constraint forall(i in 0..44)
+             (if cardboard[i+1] == 0 
+              then matrix[i]==0   
+              else matrix[i]!=0 
+              endif);
+              
+constraint forall(i in 0..44)
+             (forall(j in 0..i-1)
+               (matrix[j] != matrix[i]) -> start[matrix[i]] = i);
+               
+constraint forall(i in 0..44)
+             (forall(j in i+1..44)
+               (matrix[j] != matrix[i]) -> end[matrix[i]] = i);
+               
+constraint forall(i in 1..24)
+           ((end[i] mod 9 - start[i] mod 9 + 1)*(end[i] div 9 - start[i] div 9 + 1) = count(matrix,i));
+           
+constraint forall(i in 0..44)
+            (if matrix[i]!=0 
+             then i div 9 >= start[matrix[i]] div 9 /\ 
+                  i div 9 <= end[matrix[i]] div 9 /\ 
+                  i mod 9 >= start[matrix[i]] mod 9 /\ 
+                  i mod 9 <= end[matrix[i]] mod 9 
+             endif);
+             
+var int: num_diff = count(el in occurrences)(el > 0);
+solve minimize num_diff;
+
+%output ["number of shape: \(num_diff)\n"];

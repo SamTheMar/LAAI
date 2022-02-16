@@ -7,7 +7,7 @@ var int: n4 = sum(i in 0..7) (power[i+9]*10^i);
 
 constraint x^3 = n3;
 constraint x^4 = n4;
-constraint forall(i in 0..9)(count(power, i) > 0);
+constraint forall(i in 0..9) (count(power, i) > 0);
 
 solve satisfy;
 
