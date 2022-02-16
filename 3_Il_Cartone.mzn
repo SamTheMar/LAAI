@@ -53,4 +53,4 @@ constraint forall(i in 0..44)
 var int: num_diff = count(el in occurrences)(el > 0);
 solve minimize num_diff;
 
-%output ["number of shape: \(num_diff)\n"];
+output ["\(matrix)\n"];
