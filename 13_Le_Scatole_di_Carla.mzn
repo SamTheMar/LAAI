@@ -1,7 +1,10 @@
-int: side_cube_small = 10;
-int: side_cube_big = 20;
+%side of small cube
+int: cube_s = 10;
+%side of big cube
+int: cube_b = 20;
 var 1..10: x;
 
-constraint x * side_cube_small^3 = side_cube_big^3;
+%times that small cub is conteined in big cube
+constraint x * cube_s^3 = cube_b^3;
 
 solve satisfy;
