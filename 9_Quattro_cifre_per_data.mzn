@@ -1,11 +1,11 @@
-%array rapresentation of date
+%array rapresentation of the date
 array[1..8] of var 0..9: date;
 
-%year array to int
+%year from array to int
 var 2021..2030: year = sum(i in 5..8) (date[i]*10^(8-i));
-%month array to int
+%month from array to int
 var 0..12: month = date[3]*10 + date[4];
-%day array to int
+%day from array to int
 var 0..30: day = date[1]*10 + date[2];
 
 %all digits are contained exactly twice 

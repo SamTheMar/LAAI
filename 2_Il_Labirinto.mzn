@@ -16,7 +16,7 @@ array[1..16] of var 2..19: path;
 constraint path[1] = 2;
 constraint count(path, 15) > 0;
 
-%impose the single step from each point
+%you can reach each point of the path just once
 constraint forall(i in 1..length(path)) (path[i] != 15 -> count(path, path[i], 1));
 
 %remain in the goal point, where is find, for all remaining point

@@ -1,11 +1,11 @@
 %array rapresentation of time
 array[1..3] of var 0..720: time;
 
-%hour array to int
+%hour from array to int
 var 0..719: hour = time[1];
-%minute array to int
+%minute from array to int
 var 0..15: minute = time[2];
-%second array to int
+%second from array to int
 var 0..59: second = time[3];
 
 %possible hand movements
