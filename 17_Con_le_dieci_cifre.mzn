@@ -1,5 +1,5 @@
 %number
-var 0..100: x;
+var 1..100: x;
 %power conteins the digits of the initial number raised to the third in the first 9 
 %positions and digits of the same number raised to the fourth in the following positions
 array [1..16] of var 0..9: power;

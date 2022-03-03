@@ -1,11 +1,11 @@
 %number of edges contestant to the same vertices
-var 3..30: c;
+int: c = 3;
 %number of total faces  
 int: f = 7;
 %number of total edges 
-var 1..30: s;
+var 15..30: s;
 %number of total vertices
-var 1..30: v;
+var 10..30: v;
 
 %Euler's formula 
 constraint s=f+v-2;
